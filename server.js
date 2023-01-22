@@ -15,8 +15,9 @@ const PORT=process.env.port||8080
 
 
 app.get('/', async (req, res)=>{
-    res.json("YOOOOOOOOOOOOOOOOOOOO:!")
+    res.sendFile(__dirname+'/index.html')
 })
+
 app.post('/genAiImage', async (req,res)=>{
     
      console.log(req.body.query)
