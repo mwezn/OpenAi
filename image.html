@@ -8,8 +8,9 @@
 </head>
 <body>
 <h1>Hello world</h1>
-<form onsubmit="popup()">
+<form>
     <input id="searchQ" type="text">
+    <input type="submit" value="generateImg">
 </form>
 <div class="AiImg">
     <img id="img1"></img>
@@ -20,13 +21,31 @@
         alert("submited!23")
     }
 
+    async function onSubmit(event){
+        event.preventDefault();
+        let searchText=document.getElementById("searchQ").value;
+        console.log(searchText);
+        let config={method:'POST',mode:'cors', body: JSON.stringify({query: searchText}),headers: {
+        'Accept': 'application/json','Content-Type': 'application/json'}}
+        await fetch('http://localhost:8080/genAiImage',config)
+          .then(d=>{
+              console.log(d)
+              return d
+            })
+          .catch(err=>console.log(err))
+
+
+    }
+
     function ontype(event){
         console.log(event.target.value)
     }
     let searchText=document.getElementById("searchQ")
     searchText.addEventListener("input", (e)=>ontype(e))
     let img=document.querySelector('#img1')
-    img.setAttribute('src', 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-GiryZANBnzQC0VVxWaIf4pXV/user-P7luTKxlqxtjvHi4cHY0E9bJ/img-SCc1IQJD2JX9PC380lkdeWOo.png?st=2023-01-21T19%3A37%3A44Z&se=2023-01-21T21%3A37%3A44Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-01-21T17%3A34%3A58Z&ske=2023-01-22T17%3A34%3A58Z&sks=b&skv=2021-08-06&sig=Vren9a9vQ7qqDmRGE%2BrEClpG5EOnjtkHNAqxUSJ0B5o%3D')
+    let form=document.querySelector('form')
+    form.addEventListener('submit', (e)=>onSubmit(e))
+    img.setAttribute('src', 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-GiryZANBnzQC0VVxWaIf4pXV/user-P7luTKxlqxtjvHi4cHY0E9bJ/img-0kWUgy5DzehA1wsJoPl6yKGT.png?st=2023-01-22T07%3A27%3A00Z&se=2023-01-22T09%3A27%3A00Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-01-22T03%3A55%3A08Z&ske=2023-01-23T03%3A55%3A08Z&sks=b&skv=2021-08-06&sig=uEMR1rcepar5g1PkCiQqnLewMQeBxsv7s1O6NmLBnGg%3D')
 
 </script>
 </body>
