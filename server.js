@@ -24,7 +24,7 @@ app.post('/genAiImage', async (req,res)=>{
     try {
      let img=await genImg(req.body.query)
      console.log("THE iMAGE is:" + img)
-     res.send(img)
+     res.send({src:`${img}`})
     }
     catch(err){
         res.json(err)
