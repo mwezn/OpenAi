@@ -5,22 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-<h1>Hello world</h1>
+<h1>OpenAI <br>Image generation</h1>
 <form>
     <input id="searchQ" type="text">
     <input type="submit" value="generateImg">
 </form>
 <div class="AiImg">
+    <p id="imgload"></p>
     <img id="img1"></img>
-
 </div>
 <script>
     let img=document.querySelector('#img1')
     async function onSubmit(event){
         event.preventDefault();
         let searchText=document.getElementById("searchQ").value;
+        let loading=document.getElementById("imgload")
+        loading.innerHTML="Generating image..please wait"
         console.log(searchText);
         let config={method:'POST',mode:'cors', body: JSON.stringify({query: searchText}),headers: {
         'Accept': 'application/json','Content-Type': 'application/json'}}
@@ -34,6 +37,7 @@
             .then(d=>{
                 console.log(d)
                 img.setAttribute('src', d.src)
+                loading.innerHTML="";
             })
           .catch(err=>console.log(err))
     }

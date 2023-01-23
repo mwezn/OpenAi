@@ -6,12 +6,13 @@ const {genImg}=require('./openaiconfig')
 const cors = require('cors');
 app.use(cors());
 app.use(express.json())
+app.use(express.static(__dirname))
 
 
 
 
 const PORT=process.env.port||8080
-//console.log(genImg('future technology'),PORT)
+
 
 
 app.get('/', async (req, res)=>{
@@ -20,17 +21,13 @@ app.get('/', async (req, res)=>{
 
 app.post('/genAiImage', async (req,res)=>{
     
-     console.log(req.body.query)
-     
     try {
      let img=await genImg(req.body.query)
-     console.log("THE iMAGE is:" + img)
      res.send({src:`${img}`})
     }
     catch(err){
         res.json(err)
     }
-
 })
 
 app.listen(PORT,()=>{
