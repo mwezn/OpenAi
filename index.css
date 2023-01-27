@@ -3,8 +3,33 @@ form {
 }
 
 body {
-    background-color: aqua;
+    background-color: grey;
 }
 #img1 {
-    border: 2px solid black;
+    border: 1px solid black;
 }
+.blinking-dots {
+    width:10px;
+    height:10px;
+    background-color: white;
+    transition: all .5s ease-in-out;
+    border-radius: 10px;
+}
+.blinking-dots::before,
+.blinking-dots::after {
+    content:"";
+    position:absolute;
+    width:10px;
+    height:10px;
+    background-color: white;
+    transition: all .5s ease-in-out;
+    border-radius: 10px;
+}
+
+.blinking-dots::before {
+    transform:translateX(-10px)
+}
+.blinking-dots::after {
+    transform:translateX(10px)
+}
+

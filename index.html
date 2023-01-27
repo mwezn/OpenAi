@@ -17,13 +17,17 @@
     <p id="imgload"></p>
     <img id="img1"></img>
 </div>
+
+
+<span class="blinking-dots"></span>
+
 <script>
     let img=document.querySelector('#img1')
     async function onSubmit(event){
         event.preventDefault();
         let searchText=document.getElementById("searchQ").value;
         let loading=document.getElementById("imgload")
-        loading.innerHTML="Generating image..please wait"
+        loading.innerHTML="<h1>Generating image..please wait</h1>"
         console.log(searchText);
         let config={method:'POST',mode:'cors', body: JSON.stringify({query: searchText}),headers: {
         'Accept': 'application/json','Content-Type': 'application/json'}}

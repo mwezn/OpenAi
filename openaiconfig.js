@@ -1,7 +1,5 @@
-//import { Configuration, OpenAIApi } from "openai";
 const openai=require("openai");
 require('dotenv').config();
-
 
 
 const configuration = new openai.Configuration({
@@ -26,4 +24,25 @@ async function genImg(queryTxt){
       return image_url
 }
 
-module.exports= {genImg};
+async function txt2Cmd(){
+  await openai2.createCompletion({
+    model: "text-davinci-003",
+    prompt: "What goes up must",
+    temperature: 0,
+    max_tokens: 100,
+    top_p: 1.0,
+    frequency_penalty: 0.2,
+    presence_penalty: 0.0,
+    stop: ["\n"],
+  })
+  .then(d=>{
+    console.log(d.data,d.json);
+    return d;
+  })
+  .catch(err=>console.log(err))
+
+}
+
+txt2Cmd();
+
+module.exports= {genImg, txt2Cmd};
