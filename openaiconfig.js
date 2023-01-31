@@ -36,7 +36,7 @@ async function txt2Cmd(){
     stop: ["\n"],
   })
   .then(d=>{
-    console.log(d.data,d.json);
+    console.log(d.data);
     return d;
   })
   .catch(err=>console.log(err))

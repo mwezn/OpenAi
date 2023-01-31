@@ -17,6 +17,17 @@ app.get('/', async (req, res)=>{
     res.sendFile(__dirname+'/index.html')
 })
 
+app.post('/getCompletion', async (req,res)=>{
+    
+    try {
+     let img=await txt2Cmd(req.body.query)
+     res.send({src:`${img}`})
+    }
+    catch(err){
+        res.json(err)
+    }
+})
+
 app.post('/genAiImage', async (req,res)=>{
     
     try {
