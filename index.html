@@ -8,21 +8,33 @@
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-<h1>OpenAI <br>Image generation</h1>
+<h1>OpenAI Image generation</h1>
 <form>
-    <input id="searchQ" type="text">
+    <input id="searchQ" placeholder="Enter your image prompt" type="text">
     <input type="submit" value="generateImg">
 </form>
 <div class="AiImg">
     <p id="imgload"></p>
     <img id="img1"></img>
+    <img id="img2"></img>
+    <img id="img3"></img>
+    <img id="img4"></img>
+    <img id="img5"></img>
+    
+
 </div>
 
 
 <span class="blinking-dots"></span>
 
 <script>
-    let img=document.querySelector('#img1')
+    let img1=document.querySelector('#img1')
+    let img2=document.querySelector('#img2')
+    let img3=document.querySelector('#img3')
+    let img4=document.querySelector('#img4')
+    let img5=document.querySelector('#img5')
+
+
     async function onSubmit(event){
         event.preventDefault();
         let searchText=document.getElementById("searchQ").value;
@@ -33,15 +45,23 @@
         'Accept': 'application/json','Content-Type': 'application/json'}}
         await fetch('http://localhost:8080/genAiImage',config)
           .then(d=>{
+              console.log(d)
               return d
             })
             .then(d=>{
+                //console.log(d.json())
                 return d.json()
             })
             .then(d=>{
-                console.log(d)
+                /*console.log(d)
                 img.setAttribute('src', d.src)
-                loading.innerHTML="";
+                loading.innerHTML="";*/
+                img1.setAttribute('src',d[0].url)
+                img2.setAttribute('src',d[1].url)
+                img3.setAttribute('src',d[2].url)
+                img4.setAttribute('src',d[3].url)
+                img5.setAttribute('src', d[4].url)
+                
             })
           .catch(err=>console.log(err))
     }
